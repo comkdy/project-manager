@@ -1,0 +1,16 @@
+.evaluation-knowledge-summary{margin:16px 0;line-height:1.6;min-width:0}
+.evaluation-knowledge-summary h3{font-size:15px;margin:18px 0 8px}
+.evaluation-relationships{list-style:none;padding:0;margin:0}
+.evaluation-relationships>li{border-bottom:1px solid #d9dee6;padding:12px 0}
+.evaluation-relationships>li>strong{display:block;overflow-wrap:anywhere}
+.evaluation-relationships>li>span{font-size:12px;color:#59677b}
+.evaluation-relationships dl{display:flex;flex-wrap:wrap;gap:12px 32px;margin:8px 0}
+.evaluation-relationships dt{font-size:12px;color:#59677b}
+.evaluation-relationships dd{margin:0;overflow-wrap:anywhere}
+.evaluation-knowledge-summary summary{cursor:pointer;font-size:13px}
+.evaluation-knowledge-summary blockquote{margin:10px 0;border-left:3px solid #9cb5cf;padding-left:12px;white-space:pre-wrap}
+.evaluation-knowledge-summary pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
+.evaluation-connections{margin:16px 0}
+.evaluation-connections li{margin-bottom:12px}
+.evaluation-connections p{margin:4px 0}
+.evaluation-computation{white-space:pre-wrap;overflow-wrap:anywhere}

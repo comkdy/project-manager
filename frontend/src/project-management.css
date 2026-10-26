@@ -1,0 +1,22 @@
+.project-management-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.project-management-toolbar h3{margin:0 0 5px}
+.project-management-toolbar p,.project-management-info p{color:#697e8a;font-size:13px;margin:0}
+.project-management-toolbar>.MuiButton-root{flex-shrink:0}
+.project-management-list{display:grid;gap:8px}
+.project-management-list article{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #cedde2;border-radius:9px;padding:10px 14px;min-height:58px;box-sizing:border-box;background:#fff}
+.project-management-list article.inactive{background:#f5f7f8}
+.project-management-info{min-width:0;flex:1;display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr);align-items:center;column-gap:10px;row-gap:4px}
+.project-management-info>strong{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}
+.project-management-info>div{display:flex;margin:0;gap:4px;align-items:center;flex-wrap:nowrap;min-width:0;overflow:hidden}
+.project-management-info .MuiChip-root{height:21px;font-size:11px;max-width:110px;flex-shrink:0}
+.project-management-info>p{grid-column:1/-1;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.project-management-actions{display:flex;align-items:center;flex-shrink:0;gap:3px}
+.project-management-actions .MuiFormControlLabel-root{margin:0}
+.project-management-actions .MuiFormControlLabel-label{font-size:12px}
+.project-management-actions .MuiIconButton-root{padding:6px}
+.project-management-actions .project-delete-button:hover{color:#b42318;background:#fff0ed}
+.project-management-fields{display:flex;flex-direction:column;gap:20px;padding-top:12px!important}
+.project-management-fields .MuiOutlinedInput-notchedOutline{border-color:#aebfc7}
+.project-management-empty{padding:40px;text-align:center;color:#6d828d;border:1px dashed #bbcdd3;border-radius:12px}
+@media(max-width:600px){.project-management-list article{padding:9px 10px;gap:6px}.project-management-info{column-gap:7px;row-gap:3px}.project-management-info>strong{max-width:135px}.project-management-actions .MuiFormControlLabel-label{display:none}}
+@media(max-width:440px){.project-management-toolbar{align-items:flex-start;flex-direction:column}.project-management-info>strong{max-width:100px}}

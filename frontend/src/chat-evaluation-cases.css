@@ -1,0 +1,24 @@
+.chat-evaluation-cases{display:grid;gap:12px;margin:12px 0}
+.chat-evaluation-case{padding:13px;border:1px solid var(--border,#dce3ec);border-radius:10px;background:var(--surface,#fff)}
+.chat-evaluation-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.chat-evaluation-case small,.chat-evaluation-match{color:var(--muted,#64748b);font-size:12px}
+.chat-evaluation-case p{white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0}
+.chat-evaluation-case summary{cursor:pointer;font-size:13px;color:var(--accent,#3156a3)}
+.chat-evaluation-case dl{margin:10px 0;font-size:12px}
+.chat-evaluation-case dl>div{margin:8px 0}
+.chat-evaluation-case dt{font-weight:600}
+.chat-evaluation-case dd{margin:3px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.chat-evaluation-suggestion{border-top:1px solid var(--border,#dce3ec);margin-top:12px;padding-top:10px;font-size:13px}
+.chat-evaluation-suggestion p{font-size:12px;color:var(--muted,#64748b)}
+.chat-evaluation-notices{padding-left:18px;margin:0;color:var(--muted,#64748b);font-size:12px;line-height:1.55}
+.chat-evaluation-narrative{font-size:14px;line-height:1.75;overflow-wrap:anywhere}
+.chat-evaluation-narrative>small,.chat-evaluation-scope{color:var(--muted,#64748b);font-size:12px}
+.chat-evaluation-paragraph{margin:10px 0 18px}
+.chat-evaluation-paragraph p{margin:0 0 6px;white-space:pre-wrap}
+.chat-evaluation-narrative h4{font-size:14px;margin:20px 0 8px}
+.chat-evaluation-citations{font-size:12px;color:var(--muted,#64748b)}
+.chat-evaluation-citations summary,.chat-evaluation-evidence-list>summary{cursor:pointer;color:var(--accent,#3156a3);padding:4px 0}
+.chat-evaluation-citations>div{padding:10px 0;border-bottom:1px solid var(--border,#dce3ec)}
+.chat-evaluation-citations small{display:block}
+.chat-evaluation-citations blockquote{margin:6px 0;padding-left:10px;border-left:2px solid var(--border,#dce3ec);white-space:pre-wrap;overflow-wrap:anywhere}
+.chat-evaluation-evidence-list>.chat-evaluation-case{margin-top:10px}

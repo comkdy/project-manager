@@ -1,0 +1,28 @@
+.week-picker{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#516674}.week-picker>.MuiTextField-root{width:100px}.week-picker>.MuiTextField-root:last-child{width:108px}.week-picker .MuiInputBase-root{background:white}.board-toolbar{flex-wrap:wrap;gap:18px}.board-period{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.card-period-controls{display:flex;flex-direction:column;gap:14px;padding-bottom:16px;border-bottom:1px solid #dce5eb}.card-period-controls .MuiFormControlLabel-root{margin:0}.card-period-controls .MuiFormControlLabel-label{font-size:13px}.period-value{font-size:12px;color:#607785;margin-top:-8px}.card-period-controls .week-picker>span{width:100%}
+.board-toolbar .board-period{margin-left:auto}
+.board-period-button.MuiButton-root{gap:7px;padding:7px 11px;border:1px solid #d5e3e8;border-radius:8px;background:#fff;white-space:nowrap;min-height:34px;font-size:11px;line-height:18px;box-shadow:0 1px 2px #183e4b03}
+.board-period-button.MuiButton-root:hover{border-color:#8ebfba;background:#f7fbfa}
+.board-period-button .MuiButton-startIcon{color:#087f80;margin-right:0}
+.board-period-button .MuiButton-endIcon{margin-left:3px;color:#78909c}
+.board-period-label{color:#738995;font-weight:400}
+.board-period-button strong{font-size:11px;font-weight:650;color:#285369;font-variant-numeric:tabular-nums}
+.board-period-until{font-size:10px;color:#738995;font-weight:400}
+.board-auto-refresh{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:#708a91;font-size:10px}
+.board-auto-refresh .connection-dot{width:5px;height:5px;background:#5cae9f}
+.board-period-popover.MuiPaper-root{width:304px;max-width:calc(100vw - 32px);padding:16px;margin-top:8px;border:1px solid #dce7eb;border-radius:12px;box-shadow:0 10px 32px #183e4b1a}
+.board-period-title{display:flex;align-items:center;gap:7px;margin-bottom:19px;color:#285369;font-size:12px}
+.board-period-title>svg{color:#087f80}
+.board-period-title .MuiButton-root{margin-left:auto;padding:3px 8px;min-width:0;background:#edf6f4;font-size:11px}
+.board-period-popover .week-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.board-period-popover .week-picker>span{grid-column:1/-1;font-size:11px;margin-bottom:1px}
+.board-period-popover .week-picker>.MuiTextField-root{width:100%}
+.board-period-popover .MuiInputBase-root{font-size:13px}
+.board-period-popover .MuiOutlinedInput-notchedOutline{border-color:#c8d9e0}
+.board-period-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #edf1f4}
+.board-period-bottom>span{font-size:10px;color:#78909c}
+.board-period-bottom .MuiButton-root{min-width:54px;font-size:11px;box-shadow:none}
+.refresh-spinning{animation:dashboard-refresh-spin 1.2s linear infinite}
+@keyframes dashboard-refresh-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.refresh-spinning{animation:none}}
+@media(max-width:760px){.board-toolbar{gap:12px}.board-toolbar .toolbar-actions{margin-left:auto;flex-wrap:wrap;justify-content:flex-end}}
+@media(max-width:480px){.main-content .board-toolbar{flex-direction:row;align-items:center}.board-toolbar .board-period{margin-left:auto}.board-period-button.MuiButton-root{padding:6px 9px;gap:5px}.board-period-label{display:none}.board-toolbar .toolbar-actions{gap:4px}.board-auto-refresh{font-size:9px}}

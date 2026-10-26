@@ -1,0 +1,105 @@
+// Disposable app and a fresh headless browser; no access to personal browser profiles.
+const {chromium}=require('C:/Users/comkd/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const base='http://127.0.0.1:8001';
+(async()=>{
+ const browser=await chromium.launch({headless:true,channel:'chrome'});
+ const report={},errors=[];
+ try{
+  const page=await browser.newPage({viewport:{width:1440,height:1050},timezoneId:'Asia/Seoul'});
+  page.on('pageerror',e=>errors.push(e.message));
+  const choose=async(label,value)=>{await page.getByRole('combobox',{name:label,exact:true}).click();await page.getByRole('option',{name:value,exact:true}).click()};
+  await page.goto(base);await page.getByRole('button',{name:'데이터 관리',exact:true}).waitFor();
+  assert.deepEqual((await page.getByRole('navigation',{name:'주요 기능'}).locator('button').allTextContents()).map(v=>v.replace(/\d+$/,'')),['프로젝트','AI 지식','원인 및 영향 분석','분석 기록']);
+  assert.equal(await page.locator('.analysis-paths').count(),0);
+  assert.equal(await page.locator('.overview-stats').isVisible(),true);
+  await page.getByRole('navigation',{name:'프로젝트 선택'}).getByRole('button',{name:/검증 프로젝트/}).click();
+  await page.getByRole('navigation',{name:'주요 기능'}).getByRole('button',{name:'원인 및 영향 분석',exact:true}).click();
+  await page.screenshot({path:'.local/product-flow-entry.png',fullPage:true});
+  await page.locator('.analysis-paths button').filter({hasText:'EPM 중심'}).click();
+  await page.getByRole('heading',{name:'Inline과 Recipe에 따라 EPM이 어떻게 달라졌나요?',exact:true}).waitFor();
+  assert.match(await page.getByRole('combobox',{name:'분석할 프로젝트'}).innerText(),/검증 프로젝트/);
+  await choose('변경·평가한 공정','oper A');await choose('기준 Recipe','RCP1');await choose('평가 Recipe','RCP2');
+  await page.getByLabel('시작 시각',{exact:true}).fill('2026-09-01T00:00');
+  await page.getByLabel('종료 시각 (미포함)',{exact:true}).fill('2026-10-19T23:59');
+  await choose('반복 측정 처리','동일 측정 위치의 마지막 값');
+  await page.getByText('변화 판정 기준 (선택)',{exact:true}).click();
+  await page.getByLabel('공통 최소 유효 표본 수 (선택)',{exact:true}).fill('3');
+  await page.getByLabel('공통 평균 변화량 절댓값 기준 (선택)',{exact:true}).fill('0.5');
+  const created=page.waitForResponse(r=>r.url()===base+'/api/analytics/runs'&&r.request().method()==='POST');
+  await page.getByRole('button',{name:'분석 실행',exact:true}).click();
+  const run=await (await created).json();report.split_run=run.id;
+  assert.equal(run.request.project_id,1000999);assert.equal(run.request.operation,'oper A');
+  await page.getByRole('heading',{name:'EPM에서 무엇이 달라졌나요?'}).waitFor({timeout:90000});
+  assert.equal(await page.locator('form.analytics-form').isVisible(),false);
+  assert.equal(await page.locator('.impact-brief > .impact-cards .impact-card').count(),3);
+  await page.getByText(/같은 Recipe 비교군의 Inline도 함께 보기/).click();
+  assert.match(await page.locator('.impact-related').innerText(),/짝지은 상관·원인 분석은 아직 포함하지 않습니다/);
+  await page.screenshot({path:'.local/product-flow-epm.png',fullPage:true});
+  await page.getByRole('button',{name:'Recipe에 따른 Inline 변화',exact:true}).click();
+  await page.getByRole('heading',{name:'Inline에서 무엇이 달라졌나요?'}).waitFor();
+  assert.match(await page.locator('.impact-brief > .impact-cards').innerText(),/oper A CD/);
+  await page.screenshot({path:'.local/product-flow-inline.png',fullPage:true});
+  await page.getByRole('button',{name:'분석 기록 보기',exact:true}).click();
+  await page.getByRole('heading',{name:'분석 기록',exact:true}).waitFor();
+  const card=page.locator('.activity-item').filter({hasText:'oper A'}).first();
+  await card.getByRole('button',{name:'결과·질문 확인',exact:true}).click();
+  await page.getByRole('heading',{name:'oper A · RCP1 / RCP2',exact:true}).waitFor();
+  report.project_split_and_both_summaries=true;report.record_reopens_existing_result=true;
+  await page.getByRole('button',{name:'조건 불러오기',exact:true}).click();
+  await page.getByLabel('시작 시각',{exact:true}).waitFor();
+  assert.equal(await page.getByLabel('시작 시각',{exact:true}).inputValue(),'2026-09-01T00:00');
+  assert.match(await page.getByRole('combobox',{name:'분석할 프로젝트'}).innerText(),/검증 프로젝트/);
+  report.condition_and_project_restore=true;
+  await page.getByRole('button',{name:'새 비교 시작',exact:true}).click();
+  await page.getByRole('heading',{name:'Recipe를 바꾸면 Inline이 어떻게 달라지나요?',exact:true}).waitFor();
+  const ask=page.waitForResponse(r=>r.url()===base+'/api/analytics/runs'&&r.request().method()==='POST');
+  await page.getByRole('button',{name:'기준 확인 요청',exact:true}).click();
+  const needs=await (await ask).json();assert.equal(needs.status,'needs_input');assert.equal(needs.request.project_id,1000999);
+  await page.getByRole('button',{name:'이 질문 확인',exact:true}).first().click();
+  await page.getByRole('button',{name:'원래 분석 조건으로 돌아가기',exact:true}).waitFor();
+  await page.getByRole('button',{name:'원래 분석 조건으로 돌아가기',exact:true}).click();
+  await page.getByLabel('시작 시각',{exact:true}).waitFor();
+  assert.equal(await page.getByLabel('시작 시각',{exact:true}).inputValue(),'');
+  assert.match(await page.getByRole('combobox',{name:'분석할 프로젝트'}).innerText(),/검증 프로젝트/);
+  report.question_return_preserves_scope_and_unknown_conditions=true;
+  for(const role of ['editor','viewer']){
+   const ordinary=await browser.newPage({viewport:{width:1440,height:1050}});
+   ordinary.on('pageerror',e=>errors.push(e.message));
+   // UI visibility test only. Server authorization is covered by the backend suite.
+   await ordinary.route('**/api/auth/session',async route=>{const response=await route.fetch();const data=await response.json();data.user.role=role;await route.fulfill({response,json:data})});
+   await ordinary.goto(base);await ordinary.getByRole('button',{name:'데이터 관리',exact:true}).waitFor();
+   await ordinary.locator('.board-toolbar').waitFor();
+   assert.equal(await ordinary.locator('.analysis-paths').count(),0);
+   assert.equal(await ordinary.locator('.database-status:visible').count(),1);
+   assert.equal(await ordinary.getByRole('button',{name:'워크스페이스 관리',exact:true}).count(),0);
+   assert.equal(await ordinary.getByRole('button',{name:'카드 만들기',exact:true}).count(),role==='editor'?1:0);
+   if(role==='editor'){
+    await ordinary.getByRole('button',{name:'카드 만들기',exact:true}).click();
+    await ordinary.getByRole('heading',{name:'카드 구성',exact:true}).waitFor();
+    await ordinary.getByRole('button',{name:'취소',exact:true}).click();
+    report.editor_card_builder_retained=true;
+   }
+   await ordinary.getByRole('button',{name:'데이터 관리',exact:true}).click();
+   await ordinary.locator('.data-workspace').waitFor();
+   assert.equal(await ordinary.getByRole('button',{name:'데이터셋 추가',exact:true}).count(),role==='editor'?1:0);
+   await ordinary.getByRole('button',{name:'쿼리 관리',exact:true}).click();
+   await ordinary.getByRole('dialog').waitFor();
+   await ordinary.getByRole('dialog').getByRole('button',{name:'닫기',exact:true}).click();
+   await ordinary.getByRole('navigation',{name:'주요 기능'}).getByRole('button',{name:'분석 기록',exact:false}).click();
+   await ordinary.getByRole('navigation',{name:'주요 기능'}).getByRole('button',{name:'프로젝트',exact:true}).click();
+   await ordinary.locator('.data-workspace').waitFor();
+   report[role+'_data_query_access_retained']=true;
+   await ordinary.getByRole('navigation',{name:'주요 기능'}).getByRole('button',{name:'AI 지식',exact:true}).click();
+   await ordinary.getByRole('heading',{name:/AI 지식/}).waitFor();
+   assert.equal(await ordinary.getByRole('button',{name:'검색 시험',exact:true}).count(),1);
+   assert.equal(await ordinary.getByRole('button',{name:'지식 목록',exact:true}).count(),1);
+   report[role+'_knowledge_access_restored']=true;await ordinary.close();
+  }
+  assert.deepEqual(errors,[]);report.browser_errors=errors;
+  for(const path of ['/api/admin/recovery','/api/admin/operations'])assert.equal((await page.request.get(base+path)).status(),404);
+  report.backup_and_operational_endpoints_absent=true;
+  fs.writeFileSync('validation/product-flow-ui.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+ }catch(error){console.error(error);throw error}finally{await browser.close()}
+})().catch(()=>{process.exitCode=1});

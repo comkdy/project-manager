@@ -1,0 +1,17 @@
+.dataset-scope-badge{display:inline-block;vertical-align:middle;font-size:10px;font-weight:600;line-height:1.6;padding:1px 7px;border-radius:5px;border:1px solid;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.dataset-scope-badge.shared{color:#256f64;background:#edf8f3;border-color:#c9e8da}
+.dataset-scope-badge.project{color:#385f95;background:#eff4fc;border-color:#d2dff1}
+.dataset-item .dataset-scope-badge{margin-top:5px}
+.dataset-choice-label{display:inline-flex;align-items:center;gap:8px;min-width:0;max-width:100%;vertical-align:middle}
+.dataset-choice-label>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dataset-choice-label .dataset-scope-badge{flex-shrink:0}
+.data-heading h2 .dataset-scope-badge{margin-left:10px}
+.dataset-kind-badge{display:inline-block;font-size:10px;font-weight:600;line-height:1.6;padding:1px 7px;border:1px solid;border-radius:5px;white-space:nowrap;vertical-align:middle}
+.dataset-kind-badge.source{background:#edf7f7;border-color:#c7e1e1;color:#246466}
+.dataset-kind-badge.derived{background:#f3f0fb;border-color:#e0d8f2;color:#69518c}
+.data-heading h2 .dataset-kind-badge{margin-left:10px}
+.dataset-group h3{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:18px 10px 8px;color:#53656b}
+.dataset-group h3 span{font-size:11px;color:#809097}
+.dataset-group-empty,.dataset-scope-note{font-size:12px;color:#6f8085;line-height:1.6}
+.dataset-group-empty{margin:8px 10px 16px}
+.dataset-choice-label .dataset-kind-badge{flex-shrink:0}

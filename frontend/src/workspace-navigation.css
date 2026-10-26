@@ -1,0 +1,17 @@
+.workspace-nav{display:flex;align-items:center;gap:6px;padding-left:24px;border-left:1px solid #e4eaee}
+.workspace-nav>button{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:7px;background:transparent;padding:11px 16px;color:#718591;font:inherit;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
+.workspace-nav>button:hover{background:#f1f6f7;color:#28656a}
+.workspace-nav>button[aria-current="page"]{background:#e8f4f1;color:#087c74}
+.workspace-nav>button:focus-visible{outline:2px solid #167e89;outline-offset:3px}
+@media(max-width:1100px){
+ .app-shell>.app-header{height:auto;min-height:86px;flex-wrap:wrap;column-gap:16px;row-gap:12px;padding-top:16px;padding-bottom:12px}
+ .workspace-nav{order:3;flex-basis:100%;border-left:0;border-top:1px solid #edf1f3;padding:12px 0 0}
+}
+@media(max-width:480px){
+ .app-shell>.app-header{padding-left:17px;padding-right:17px;column-gap:8px}
+ .workspace-nav>button{flex:1}
+ .knowledge-heading{gap:12px}
+ .knowledge-heading h1{gap:8px;font-size:26px}
+ .knowledge-heading>.MuiButton-root{flex-shrink:0;padding:6px 9px;font-size:11px}
+ .knowledge-toolbar>.MuiButton-root{flex-shrink:0;white-space:nowrap}
+}

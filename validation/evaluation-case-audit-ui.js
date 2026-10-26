@@ -1,0 +1,2 @@
+
+const tabs=[...document.querySelectorAll('[role="tab"]')];function choose(tab){tabs.forEach(t=>{let selected=t===tab;t.setAttribute('aria-selected',String(selected));document.getElementById(t.getAttribute('aria-controls')).hidden=!selected;});}tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>choose(tab));tab.addEventListener('keydown',e=>{if(['ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();let next=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];choose(next);next.focus();}})});

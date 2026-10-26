@@ -1,0 +1,3 @@
+.trellis-scroll{height:100%;width:100%;min-height:0;overflow:auto;overscroll-behavior:contain}
+.trellis-scroll>.plot-container{flex:none;width:100%}
+.trellis-image{display:block;width:100%;height:auto}

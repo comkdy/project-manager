@@ -1,0 +1,10 @@
+CREATE INDEX IF NOT EXISTS inline_project_date_id ON inline_measurements(project_id, measured_at, id);
+CREATE INDEX IF NOT EXISTS inline_wafer_metric ON inline_measurements(wafer_id, metric_name, process_step) INCLUDE (project_id, value);
+CREATE INDEX IF NOT EXISTS inline_metric_equipment ON inline_measurements(metric_name, equipment_id, id);
+CREATE INDEX IF NOT EXISTS inline_thickness_summary ON inline_measurements(wafer_id, project_id) INCLUDE (value) WHERE metric_name='thickness' AND process_step='DEP';
+CREATE INDEX IF NOT EXISTS wat_project_date_id ON wat_measurements(project_id, measured_at, id);
+CREATE INDEX IF NOT EXISTS wat_wafer_metric ON wat_measurements(wafer_id, metric_name, test_run_id) INCLUDE (project_id, value);
+CREATE INDEX IF NOT EXISTS die_project_date_id ON die_results(project_id, measured_at, id);
+CREATE INDEX IF NOT EXISTS die_wafer_run ON die_results(wafer_id, test_run_id) INCLUDE (project_id, status, passed);
+CREATE INDEX IF NOT EXISTS wafers_project_date_id ON wafers(project_id, measured_at, id);
+CREATE INDEX IF NOT EXISTS lots_project_date_id ON lots(project_id, measured_at, id);

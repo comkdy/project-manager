@@ -1,0 +1,6 @@
+.job-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.job-actions:empty{display:none}
+.job-actions>.MuiAlert-root{flex-basis:100%}
+.job-actions>small{font-size:12px;color:#687e89}
+.analytics-status.cancelling{background:#fff2d8;color:#956014}
+.analytics-status.cancelled{background:#edf1f4;color:#5f7180}

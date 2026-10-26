@@ -1,0 +1,18 @@
+.chat-history-toolbar{display:flex;justify-content:space-between;padding:3px 17px 12px;background:#fff;border-bottom:1px solid #e5edf0}
+.chat-history-toolbar .MuiButton-root{font-size:11px;color:#547786}
+.chat-history-list{flex:1;min-height:0;overflow:auto;padding:23px 22px}
+.chat-history-list h3{margin:0 0 8px;font-size:18px;font-weight:600;color:#345b6d}
+.chat-history-hint{font-size:11px;color:#7e96a3;margin:0 0 20px}
+.chat-history-list .MuiTextField-root{margin-bottom:17px}
+.chat-history-item{display:flex;align-items:center;gap:7px;border:1px solid #e1e9ed;background:white;border-radius:10px;margin-bottom:9px;padding-right:8px}
+.chat-history-open{flex:1;min-width:0;border:0;background:transparent;text-align:left;padding:14px;color:#365e70;border-radius:10px}
+.chat-history-open strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.6;font-size:12px;font-weight:550;overflow-wrap:anywhere}
+.chat-history-open span{display:block;font-size:10px;color:#8c9fa8;margin-top:7px}
+.chat-history-open:hover{background:#f1f7f6}.chat-history-open:focus-visible{outline:2px solid #15877c;outline-offset:2px}
+.chat-history-empty{font-size:12px;line-height:1.9;color:#8a9faa;padding:24px 4px}
+.chat-conversation-title{padding:11px 22px 0;display:flex;gap:10px;align-items:baseline}
+.chat-conversation-title strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;font-size:11px;font-weight:500;color:#5d7d8b}
+.chat-conversation-title span{font-size:9px;white-space:nowrap;color:#8caaa1}
+.chat-resume-context{font-size:10px;line-height:1.8;color:#849ba8;margin-bottom:20px}
+.chat-resume-context button{display:block;background:transparent;border:0;padding:2px 0;color:#21877e;text-decoration:underline;text-underline-offset:3px}
+.chat-analysis-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chat-analysis-actions small{width:100%;color:#7d8e97;font-size:10px}

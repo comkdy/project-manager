@@ -1,0 +1,11 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {CssBaseline,ThemeProvider,createTheme} from '@mui/material';
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
+import App from './App';
+import './styles.css';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
+const theme=createTheme({palette:{primary:{main:'#087f80'},secondary:{main:'#18364b'},background:{default:'#f3f6f8',paper:'#ffffff'},text:{primary:'#183246',secondary:'#72828e'},error:{main:'#d05959'}},typography:{fontFamily:'"Segoe UI", "Malgun Gothic", sans-serif',fontSize:13,button:{textTransform:'none',fontWeight:650}},shape:{borderRadius:10},components:{MuiButton:{styleOverrides:{root:{boxShadow:'none',borderRadius:8,padding:'8px 15px'}}},MuiTextField:{defaultProps:{size:'small'}},MuiFormControl:{defaultProps:{size:'small'}},MuiDialog:{styleOverrides:{paper:{borderRadius:16}}},MuiTooltip:{defaultProps:{arrow:true}}}});
+const client=new QueryClient({defaultOptions:{queries:{retry:false,staleTime:30_000,refetchOnWindowFocus:false}}});
+ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><QueryClientProvider client={client}><ThemeProvider theme={theme}><CssBaseline/><App/></ThemeProvider></QueryClientProvider></React.StrictMode>);
